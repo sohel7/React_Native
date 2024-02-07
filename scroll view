@@ -1,0 +1,72 @@
+import React, { useState } from 'react';
+import { View, Text, Button, StyleSheet, TextInput,ScrollView } from 'react-native';
+
+export default function App() {
+    const [value, setValue] = useState('');
+    const [listOfNotes, setListOfNotes] = useState<string[]>([]);
+
+
+    function handleOnChangeText(getEnteredText: string) {
+        setValue(getEnteredText);
+    }
+
+    function handleOnPressButton() {
+        setListOfNotes(currentNotes => [...currentNotes, value])
+
+    }
+
+    return (
+        <View style={{ padding: 60 }}>
+
+            <View style={styles.inputContainer}>
+                <TextInput
+                    onChangeText={handleOnChangeText}
+                    style={styles.input}
+                    placeholder="Add your Email"
+                />
+                <Button onPress={handleOnPressButton} color={'#000'} title="Add Note" />
+            </View>
+            <View style={styles.listContainer}>
+            <ScrollView>
+            <Text style={styles.listItemHeader}>Show List Here!</Text>
+                {listOfNotes.map((item, index) => <Text style={styles.listItem}key={'item${index}'}>{item}</Text>)}
+            </ScrollView>
+              
+            </View>
+        </View>
+    );
+}
+
+const styles = StyleSheet.create({
+    inputContainer: {
+        flexDirection: 'row',
+        paddingBottom: 30,
+        borderBottomWidth: 1,
+    },
+    input: {
+        borderWidth: 1,
+        borderColor: '#ddd',
+        flex: 1,
+    },
+    listContainer: {
+        paddingTop: 30,
+    },
+    listItemHeader:{
+        borderRadius:30,
+        borderColor:'red',
+        backgroundColor:'orange',
+        padding:15,
+        marginBottom:15,
+        color:'#fff',
+        fontSize:20
+    },
+    listItem:{
+        borderRadius:30,
+        borderColor:'red',
+        backgroundColor:'green',
+        padding:15,
+        marginBottom:15,
+        color:'#fff',
+        fontSize:20
+    }
+});
