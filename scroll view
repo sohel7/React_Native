@@ -16,7 +16,10 @@ export default function App() {
     }
 
     return (
-        <View style={{ padding: 60 }}>
+        <View style=
+        {{ padding: 60,
+            paddingHorizontal:20
+         }}>
 
             <View style={styles.inputContainer}>
                 <TextInput
