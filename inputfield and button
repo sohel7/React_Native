@@ -3,13 +3,16 @@ import { View, Text, Button, StyleSheet, TextInput } from 'react-native';
 
 export default function App() {
   const [value, setValue] = useState('');
+  const [listOfNotes, setListOfNotes] = useState<string[]>([]);
+
 
   function handleOnChangeText(getEnteredText: string) {
     setValue(getEnteredText);
   }
 
   function handleOnPressButton() {
-    console.log(value); // Log the input value to the console
+    setListOfNotes (currentNotes=>[...currentNotes,value])
+    
   }
 
   return (
@@ -23,7 +26,9 @@ export default function App() {
         <Button onPress={handleOnPressButton} color={'#000'} title="Add Note" />
       </View>
       <View style={styles.listContainer}>
-        <Text>Show List Here!</Text>
+      <Text style={{color:'green',fontWeight:'500', fontSize:15}}>Show List Here!</Text>
+        {listOfNotes.map((item,index)=> <Text key={'item${index}'}>{item}</Text>)}
+  
        
       </View>
     </View>
